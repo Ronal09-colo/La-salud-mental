@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salud Mental — Tu mente también merece cuidado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-50: #E1F5EE;
+      --teal-100: #9FE1CB;
+      --teal-400: #1D9E75;
+      --teal-600: #0F6E56;
+      --teal-800: #085041;
+      --purple-50: #EEEDFE;
+      --purple-100: #CECBF6;
+      --purple-400: #7F77DD;
+      --purple-600: #534AB7;
+      --purple-800: #3C3489;
+      --coral-50: #FAECE7;
+      --coral-100: #F5C4B3;
+      --coral-400: #D85A30;
+      --coral-600: #993C1D;
+      --amber-50: #FAEEDA;
+      --amber-100: #FAC775;
+      --amber-400: #BA7517;
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --text: #1a1a1a;
+      --text-muted: #666660;
+      --border: rgba(0,0,0,0.1);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0.75rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 300;
+      color: var(--teal-800);
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; color: var(--text-muted);
+      text-decoration: none; font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-600); }
+
+    /* HERO */
+    .hero {
+      background: var(--teal-800);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(29,158,117,0.25);
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -50px; left: -50px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(29,158,117,0.18);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(159,225,203,0.2);
+      color: var(--teal-100);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 20px;
+      border: 0.5px solid rgba(159,225,203,0.3);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300; color: #fff; line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--teal-100); }
+    .hero p {
+      font-size: 1rem; color: rgba(255,255,255,0.72);
+      max-width: 540px; margin: 0 auto 2rem; line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--teal-100); color: var(--teal-800);
+      font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem;
+      padding: 13px 32px; border-radius: 40px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* LAYOUT */
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 3.5rem 0 1.5rem; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal-600); margin-bottom: 0.4rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 300; color: var(--text);
+      margin-bottom: 0.9rem; line-height: 1.3;
+    }
+    .section-title em { font-style: italic; }
+    .section-lead {
+      font-size: 0.95rem; color: var(--text-muted);
+      line-height: 1.7; margin-bottom: 2rem;
+    }
+    hr.divider {
+      border: none; border-top: 0.5px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* INFO CARDS */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px; margin-bottom: 1rem;
+    }
+    .info-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg); padding: 1.25rem;
+    }
+    .info-card-icon { font-size: 22px; color: var(--teal-400); margin-bottom: 0.7rem; }
+    .info-card h3 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .info-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* SIGNALS */
+    .signals-section {
+      background: var(--teal-50);
+      border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1rem;
+    }
+    .signals-section h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.35rem; font-weight: 300;
+      color: var(--teal-800); margin-bottom: 0.4rem;
+    }
+    .signals-section > p {
+      font-size: 0.87rem; color: var(--teal-600);
+      margin-bottom: 1.25rem; line-height: 1.6;
+    }
+    .signals-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+    }
+    .signals-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.85rem; color: var(--teal-800); line-height: 1.5;
+      background: rgba(255,255,255,0.65);
+      border-radius: var(--radius-md); padding: 10px 12px;
+    }
+    .signals-list li i { color: var(--teal-400); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+
+    /* STEPS */
+    .steps-section { margin-bottom: 1rem; }
+    .step { display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start; }
+    .step-num {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--purple-50); color: var(--purple-800);
+      font-size: 0.9rem; font-weight: 500;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-family: 'Fraunces', serif;
+    }
+    .step-body h3 { font-size: 0.92rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .step-body p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* TIPS */
+    .tips-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px; margin-bottom: 1rem;
+    }
+    .tip-card {
+      background: var(--purple-50);
+      border-radius: var(--radius-lg); padding: 1rem; text-align: center;
+    }
+    .tip-card i { font-size: 22px; color: var(--purple-600); display: block; margin-bottom: 0.5rem; }
+    .tip-card span { font-size: 0.8rem; color: var(--purple-800); line-height: 1.4; }
+
+    /* URGENCY */
+    .urgency-box {
+      background: var(--coral-50);
+      border: 0.5px solid var(--coral-100);
+      border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .urgency-icon { font-size: 26px; color: var(--coral-400); flex-shrink: 0; margin-top: 2px; }
+    .urgency-box h3 { font-size: 0.95rem; font-weight: 500; color: var(--coral-600); margin-bottom: 0.35rem; }
+    .urgency-box p { font-size: 0.85rem; color: var(--coral-600); line-height: 1.6; }
+    .urgency-box strong { font-weight: 500; color: var(--coral-400); }
+
+    /* RESOURCE CARDS */
+    .resource-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .resource-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .resource-icon.teal { background: var(--teal-50); color: var(--teal-600); }
+    .resource-icon.purple { background: var(--purple-50); color: var(--purple-600); }
+    .resource-icon.coral { background: var(--coral-50); color: var(--coral-600); }
+    .resource-icon.amber { background: var(--amber-50); color: var(--amber-400); }
+    .resource-card h3 { font-size: 0.9rem; font-weight: 500; margin-bottom: 2px; }
+    .resource-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+    .resource-meta { margin-left: auto; text-align: right; flex-shrink: 0; }
+    .resource-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem; font-weight: 300; color: var(--teal-600);
+    }
+    .resource-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* FOOTER */
+    footer {
+      background: var(--teal-800);
+      padding: 3rem 2rem; text-align: center; margin-top: 2rem;
+    }
+    footer p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; }
+    footer strong { color: var(--teal-100); font-weight: 500; }
+    footer .disclaimer { font-size: 0.75rem; opacity: 0.45; margin-top: 1rem; }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .wrap { padding: 0 1.25rem; }
+      .section { padding: 2.5rem 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">Salud Mental</span>
+    <ul class="nav-links">
+      <li><a href="#que-es">¿Qué es?</a></li>
+      <li><a href="#senales">Señales</a></li>
+      <li><a href="#ayuda">Buscar ayuda</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-badge">Bienestar · Salud Mental</div>
+    <h1>Tu mente también<br>merece <em>cuidado</em></h1>
+    <p>Información clara, recursos de apoyo y señales de alerta para que puedas cuidar tu bienestar emocional y el de quienes amas.</p>
+    <a class="hero-cta" href="#que-es">Explorar contenido</a>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <!-- QUÉ ES -->
+      <section class="section" id="que-es">
+        <div class="section-label">¿Qué es?</div>
+        <h2 class="section-title">Entendiendo la <em>salud mental</em></h2>
+        <p class="section-lead">La salud mental abarca nuestro bienestar emocional, psicológico y social. Influye en cómo pensamos, sentimos y actuamos en el día a día — y es tan importante como la salud física.</p>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-card-icon"><i class="ti ti-brain" aria-hidden="true"></i></div>
+            <h3>Bienestar emocional</h3>
+            <p>Capacidad de gestionar emociones, afrontar el estrés y mantener relaciones saludables.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+            <h3>Dimensión social</h3>
+            <p>Cómo nos relacionamos con los demás y contribuimos a nuestra comunidad.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon"><i class="ti ti-activity" aria-hidden="true"></i></div>
+            <h3>Funcionamiento diario</h3>
+            <p>Nuestra capacidad de trabajar, aprender, descansar y disfrutar la vida cotidiana.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon"><i class="ti ti-refresh" aria-hidden="true"></i></div>
+            <h3>Proceso dinámico</h3>
+            <p>La salud mental cambia a lo largo de la vida y puede mejorar con el apoyo adecuado.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- SEÑALES -->
+      <section class="section" id="senales">
+        <div class="section-label">Señales de alerta</div>
+        <h2 class="section-title">¿Cuándo pedir <em>ayuda</em>?</h2>
+        <p class="section-lead">Reconocer las señales a tiempo es el primer paso para buscar apoyo. No tienes que esperar a una crisis para hablar con alguien.</p>
+
+        <div class="signals-section">
+          <h2>Señales frecuentes</h2>
+          <p>Si reconoces varias de estas señales por más de dos semanas, considera hablar con un profesional.</p>
+          <ul class="signals-list">
+            <li><i class="ti ti-moon" aria-hidden="true"></i>Problemas persistentes para dormir</li>
+            <li><i class="ti ti-mood-sad" aria-hidden="true"></i>Tristeza o vacío sin causa aparente</li>
+            <li><i class="ti ti-alert-triangle" aria-hidden="true"></i>Ansiedad o preocupación constante</li>
+            <li><i class="ti ti-door-exit" aria-hidden="true"></i>Aislamiento de familiares y amigos</li>
+            <li><i class="ti ti-bolt-off" aria-hidden="true"></i>Falta de energía o motivación</li>
+            <li><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>Cambios bruscos en el apetito</li>
+            <li><i class="ti ti-focus-2" aria-hidden="true"></i>Dificultad para concentrarse</li>
+            <li><i class="ti ti-flame" aria-hidden="true"></i>Irritabilidad o cambios de humor intensos</li>
+          </ul>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- BUSCAR AYUDA -->
+      <section class="section" id="ayuda">
+        <div class="section-label">Cómo actuar</div>
+        <h2 class="section-title">Pasos para <em>buscar ayuda</em></h2>
+        <p class="section-lead">Pedir ayuda es un acto de valentía, no de debilidad. Aquí tienes una ruta sencilla para dar el primer paso.</p>
+
+        <div class="steps-section">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Reconoce lo que sientes</h3>
+              <p>Acepta que algo no está bien sin juzgarte. Nombrar tus emociones es el primer paso hacia el cambio.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Habla con alguien de confianza</h3>
+              <p>Comparte cómo te sientes con un amigo, familiar o persona cercana. No tienes que enfrentarlo solo.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Consulta a un profesional</h3>
+              <p>Psicólogos, psiquiatras y médicos de cabecera pueden orientarte. Pide una cita; es más sencillo de lo que parece.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Usa los recursos disponibles</h3>
+              <p>En Colombia existen líneas de crisis, centros de salud mental y comunidades de apoyo gratuitas.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider" style="margin-top:1rem">
+
+        <div class="section-label">Autocuidado</div>
+        <h2 class="section-title">Hábitos que <em>protegen</em> tu mente</h2>
+        <p class="section-lead">Pequeñas acciones diarias pueden marcar una gran diferencia en tu bienestar emocional.</p>
+
+        <div class="tips-row">
+          <div class="tip-card"><i class="ti ti-run" aria-hidden="true"></i><span>Ejercicio regular</span></div>
+          <div class="tip-card"><i class="ti ti-moon" aria-hidden="true"></i><span>Dormir 7–9 horas</span></div>
+          <div class="tip-card"><i class="ti ti-social" aria-hidden="true"></i><span>Conexión social</span></div>
+          <div class="tip-card"><i class="ti ti-leaf" aria-hidden="true"></i><span>Tiempo en la naturaleza</span></div>
+          <div class="tip-card"><i class="ti ti-device-mobile-off" aria-hidden="true"></i><span>Desconexión digital</span></div>
+          <div class="tip-card"><i class="ti ti-pencil" aria-hidden="true"></i><span>Escribir un diario</span></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- RECURSOS -->
+      <section class="section" id="recursos">
+        <div class="section-label">Líneas de apoyo</div>
+        <h2 class="section-title">Recursos de <em>ayuda</em> en Colombia</h2>
+        <p class="section-lead">Si tú o alguien que conoces necesita apoyo, estos recursos están disponibles de forma gratuita y confidencial.</p>
+
+        <div class="urgency-box">
+          <div class="urgency-icon"><i class="ti ti-urgent" aria-hidden="true"></i></div>
+          <div>
+            <h3>¿Estás en crisis ahora mismo?</h3>
+            <p>Si tienes pensamientos de hacerte daño, llama de inmediato a la <strong>Línea 106</strong> (Ministerio de Salud de Colombia) — disponible 24 horas, los 7 días de la semana, de forma gratuita y confidencial desde cualquier operador.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="resource-card">
+            <div class="resource-icon teal"><i class="ti ti-phone-call" aria-hidden="true"></i></div>
+            <div>
+              <h3>Línea 106 — Salud Mental</h3>
+              <p>Ministerio de Salud de Colombia. Atención psicosocial en crisis, 24/7.</p>
+            </div>
+            <div class="resource-meta">
+              <div class="resource-num">106</div>
+              <div class="resource-label">Gratuita</div>
+            </div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-icon purple"><i class="ti ti-heart-handshake" aria-hidden="true"></i></div>
+            <div>
+              <h3>Línea 192 — ICBF</h3>
+              <p>Instituto Colombiano de Bienestar Familiar. Apoyo a niños, adolescentes y familias.</p>
+            </div>
+            <div class="resource-meta">
+              <div class="resource-num">192</div>
+              <div class="resource-label">Gratuita</div>
+            </div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-icon coral"><i class="ti ti-ambulance" aria-hidden="true"></i></div>
+            <div>
+              <h3>Línea 123 — Emergencias</h3>
+              <p>Para situaciones de peligro inmediato o emergencias médicas urgentes.</p>
+            </div>
+            <div class="resource-meta">
+              <div class="resource-num">123</div>
+              <div class="resource-label">Emergencias</div>
+            </div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-icon amber"><i class="ti ti-building-hospital" aria-hidden="true"></i></div>
+            <div>
+              <h3>Centro de Salud más cercano</h3>
+              <p>Solicita atención en salud mental en cualquier centro de salud público de tu municipio.</p>
+            </div>
+            <div class="resource-meta">
+              <div class="resource-num"><i class="ti ti-map-pin" style="font-size:20px;color:var(--amber-400)" aria-hidden="true"></i></div>
+              <div class="resource-label">Presencial</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><strong>Recuerda:</strong> Buscar ayuda es una señal de fortaleza.<br>
+    La salud mental es parte de tu salud integral — merece la misma atención que tu cuerpo.</p>
+    <p class="disclaimer">Información general con fines educativos · No reemplaza la consulta con un profesional de salud</p>
+  </footer>
+
+</body>
+</html>
